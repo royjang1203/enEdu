@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Word {
+  id        String   @id @default(cuid())
+  word      String
+  pos       String
+  meaningKo String
+  level     String   // A1, A2, B1, B2
+  example   String
+  tagsJson  String   @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([level])
+  @@index([word])
+}
+
+model GrammarTopic {
+  id                 String   @id @default(cuid())
+  title              String
+  level              String   // A1, A2, B1, B2 (or MIX)
+  ruleSummary        String
+  examplesJson       String   @default("[]")
+  commonMistakesJson String   @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([level])
+  @@index([title])
+}
+
+model Attempt {
+  id          String   @id @default(cuid())
+  deviceId    String
+  kind        String   // vocab|grammar
+  questionId  String
+  sourceId    String   // Word.id or GrammarTopic.id
+  type        String   // mcq|blank
+  level       String
+  prompt      String
+  choicesJson String   @default("[]")
+  answer      String
+  chosen      String
+  isCorrect   Boolean
+  explanation String
+  createdAt   DateTime @default(now())
+
+  @@index([deviceId, createdAt])
+  @@index([deviceId, isCorrect])
+  @@index([kind, sourceId])
+}
