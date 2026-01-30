@@ -10,12 +10,12 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
             Focused learning
           </p>
-          <h1 className="text-4xl font-semibold leading-tight">
-            Build your English foundation with smart vocabulary and grammar practice.
+          <h1 className="text-[2.5rem] font-semibold leading-[140%]">
+            레벨별 어휘와 문법을 학습하고, 꾸준한 연습으로 영어 실력을 높여보세요.
           </h1>
           <p className="text-muted-foreground">
-            Explore curated words and grammar topics by level. Learn fast, stay consistent, and
-            review examples built for real-life usage.
+            Learn vocabulary and grammar by level. Practice smart, build consistency, and improve
+            your English.
           </p>
         </div>
       </section>
@@ -37,6 +37,9 @@ export default function HomePage() {
               <Button asChild variant="outline">
                 <Link href="/vocab/test">Take Vocab Test</Link>
               </Button>
+              <Button asChild variant="outline">
+                <Link href="/vocab/test?mode=reviewWrong">Review Wrong</Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -56,6 +59,9 @@ export default function HomePage() {
               </Button>
               <Button asChild variant="outline">
                 <Link href="/grammar/test">Take Grammar Test</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/grammar/test?mode=reviewWrong">Review Wrong</Link>
               </Button>
             </div>
           </CardContent>

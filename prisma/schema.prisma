@@ -58,3 +58,22 @@ model Attempt {
   @@index([deviceId, isCorrect])
   @@index([kind, sourceId])
 }
+
+model ReviewState {
+  id           String   @id @default(cuid())
+  deviceId     String
+  kind         String   // vocab|grammar
+  sourceId     String   // Word.id or GrammarTopic.id
+  level        String
+  streak       Int      @default(0)
+  intervalDays Int      @default(0)
+  easeFactor   Float    @default(2.5)
+  nextReviewAt DateTime @default(now())
+  isMastered   Boolean  @default(false)
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
+
+  @@unique([deviceId, kind, sourceId])
+  @@index([deviceId, kind, nextReviewAt])
+  @@index([deviceId, isMastered])
+}

@@ -277,9 +277,13 @@ async function main() {
   // Clean tables for deterministic seed
   const prismaAny = prisma as PrismaClient & {
     attempt?: { deleteMany: () => Promise<unknown> };
+    reviewState?: { deleteMany: () => Promise<unknown> };
   };
   if (prismaAny.attempt) {
     await prismaAny.attempt.deleteMany();
+  }
+  if (prismaAny.reviewState) {
+    await prismaAny.reviewState.deleteMany();
   }
   await prisma.word.deleteMany();
   await prisma.grammarTopic.deleteMany();

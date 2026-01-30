@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import {
   Tabs,
   TabsContent,
@@ -12,6 +12,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { getOrCreateDeviceId } from "@/lib/deviceId";
+import { LevelFilter } from "@/components/level-filter";
 
 const TABS = [
   { value: "all", label: "All" },
@@ -32,32 +33,31 @@ type WrongAttempt = {
   chosen: string;
   explanation: string;
   createdAt: string;
-};
-
-type RetryState = {
-  attemptId: string;
-  userAnswer: string;
-  isCorrect: boolean;
+  reviewState?: { nextReviewAt: string | null; isMastered: boolean } | null;
 };
 
 export default function WrongNotesPage() {
+  const searchParams = useSearchParams();
   const [kind, setKind] = React.useState<(typeof TABS)[number]["value"]>("all");
   const [attempts, setAttempts] = React.useState<WrongAttempt[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [retryOpenId, setRetryOpenId] = React.useState<string | null>(null);
-  const [retryInput, setRetryInput] = React.useState("");
-  const [retryResult, setRetryResult] = React.useState<RetryState | null>(null);
+  const [masterySaving, setMasterySaving] = React.useState<Record<string, boolean>>({});
 
   const [deviceId, setDeviceId] = React.useState("");
+  const level = searchParams.get("level") ?? "all";
 
   const loadAttempts = React.useCallback(async () => {
     if (!deviceId) return;
     setLoading(true);
-    const response = await fetch(`/api/wrong?deviceId=${deviceId}&kind=${kind}`);
+    const params = new URLSearchParams({ deviceId, kind });
+    if (level !== "all") {
+      params.set("level", level);
+    }
+    const response = await fetch(`/api/wrong?${params.toString()}`);
     const data = await response.json();
     setAttempts(Array.isArray(data) ? data : []);
     setLoading(false);
-  }, [deviceId, kind]);
+  }, [deviceId, kind, level]);
 
   React.useEffect(() => {
     setDeviceId(getOrCreateDeviceId());
@@ -68,47 +68,44 @@ export default function WrongNotesPage() {
     loadAttempts();
   }, [deviceId, loadAttempts]);
 
-  const saveAttempt = async (attempt: WrongAttempt, chosen: string, isCorrect: boolean) => {
-    await fetch("/api/attempt", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        deviceId,
-        attempt: {
+  const formatDate = (value?: string | null) => {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toISOString().slice(0, 10);
+  };
+
+  const updateMastery = async (attempt: WrongAttempt, isMastered: boolean) => {
+    if (!deviceId) return;
+    const key = `${attempt.kind}:${attempt.sourceId}`;
+    setMasterySaving((prev) => ({ ...prev, [key]: true }));
+    try {
+      await fetch("/api/review/mastery", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          deviceId,
           kind: attempt.kind,
-          questionId: attempt.questionId,
           sourceId: attempt.sourceId,
-          type: attempt.type,
-          level: attempt.level,
-          prompt: attempt.prompt,
-          choices: attempt.choices ?? [],
-          answer: attempt.answer,
-          chosen,
-          isCorrect,
-          explanation: attempt.explanation,
-        },
-      }),
-    }).catch(() => null);
-  };
-
-  const onRetry = (attempt: WrongAttempt) => {
-    setRetryOpenId(attempt.id);
-    setRetryInput("");
-    setRetryResult(null);
-  };
-
-  const submitRetry = async (attempt: WrongAttempt, chosen: string) => {
-    const normalized = chosen.trim();
-    const correct = attempt.answer.trim();
-    const isCorrect = normalized.toLowerCase() === correct.toLowerCase();
-
-    setRetryResult({
-      attemptId: attempt.id,
-      userAnswer: normalized,
-      isCorrect,
-    });
-
-    await saveAttempt(attempt, normalized, isCorrect);
+          isMastered,
+        }),
+      });
+      setAttempts((prev) =>
+        prev.map((item) =>
+          item.id === attempt.id
+            ? {
+                ...item,
+                reviewState: {
+                  nextReviewAt: item.reviewState?.nextReviewAt ?? null,
+                  isMastered,
+                },
+              }
+            : item
+        )
+      );
+    } finally {
+      setMasterySaving((prev) => ({ ...prev, [key]: false }));
+    }
   };
 
   return (
@@ -118,13 +115,16 @@ export default function WrongNotesPage() {
       </CardHeader>
       <CardContent className="space-y-6">
         <Tabs value={kind} onValueChange={(value) => setKind(value as typeof kind)}>
-          <TabsList>
-            {TABS.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value}>
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <TabsList>
+              {TABS.map((tab) => (
+                <TabsTrigger key={tab.value} value={tab.value}>
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <LevelFilter label="Level" />
+          </div>
           {TABS.map((tab) => (
             <TabsContent key={tab.value} value={tab.value} className="space-y-4">
               {loading ? (
@@ -133,14 +133,16 @@ export default function WrongNotesPage() {
                 <p className="text-sm text-muted-foreground">No wrong attempts yet.</p>
               ) : (
                 attempts.map((attempt) => {
-                  const retryOpen = retryOpenId === attempt.id;
-                  const retry = retryResult?.attemptId === attempt.id ? retryResult : null;
+                  const masteryKey = `${attempt.kind}:${attempt.sourceId}`;
+                  const isMastered = attempt.reviewState?.isMastered ?? false;
+                  const nextReview = formatDate(attempt.reviewState?.nextReviewAt);
+                  const saving = masterySaving[masteryKey];
                   return (
                     <Card key={attempt.id} className="border bg-white">
                       <CardContent className="space-y-3 pt-6">
                         <div className="flex flex-wrap items-center gap-2">
                           <Badge>{attempt.kind}</Badge>
-                          <Badge variant="secondary">{attempt.level}</Badge>
+                          <Badge className="bg-white/70 text-foreground">{attempt.level}</Badge>
                           <span className="text-xs text-muted-foreground">
                             {new Date(attempt.createdAt).toLocaleString()}
                           </span>
@@ -153,49 +155,27 @@ export default function WrongNotesPage() {
                           Correct answer: <span className="font-semibold">{attempt.answer}</span>
                         </p>
                         <p className="text-sm text-muted-foreground">{attempt.explanation}</p>
-                        <Button variant="outline" onClick={() => onRetry(attempt)}>
-                          Retry
-                        </Button>
-
-                        {retryOpen && (
-                          <div className="rounded-lg border bg-muted/30 p-4">
-                            {attempt.type === "mcq" ? (
-                              <div className="grid gap-2">
-                                {attempt.choices.map((choice) => (
-                                  <Button
-                                    key={choice}
-                                    variant="outline"
-                                    onClick={() => submitRetry(attempt, choice)}
-                                    disabled={!!retry}
-                                  >
-                                    {choice}
-                                  </Button>
-                                ))}
-                              </div>
-                            ) : (
-                              <div className="flex flex-col gap-3 sm:flex-row">
-                                <Input
-                                  value={retryInput}
-                                  onChange={(event) => setRetryInput(event.target.value)}
-                                  placeholder="Type your answer"
-                                  disabled={!!retry}
-                                />
-                                <Button
-                                  onClick={() => submitRetry(attempt, retryInput)}
-                                  disabled={!!retry}
-                                >
-                                  Submit
-                                </Button>
-                              </div>
-                            )}
-
-                            {retry && (
-                              <p className={retry.isCorrect ? "text-emerald-600" : "text-rose-600"}>
-                                {retry.isCorrect ? "Correct" : "Incorrect"}
-                              </p>
-                            )}
-                          </div>
-                        )}
+                        {nextReview ? (
+                          <p className="text-xs text-muted-foreground">Next review: {nextReview}</p>
+                        ) : null}
+                        <div className="flex flex-wrap gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => updateMastery(attempt, true)}
+                            disabled={isMastered || saving}
+                          >
+                            Mark as Mastered
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => updateMastery(attempt, false)}
+                            disabled={!isMastered || saving}
+                          >
+                            Unmaster
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   );

@@ -8,6 +8,8 @@ const BLANK_COUNT = 4;
 
 const BE_VERBS = ["am", "is", "are"];
 
+type Mode = "mixed" | "reviewWrong";
+
 function pickBlankToken(sentence: string) {
   const lower = sentence.toLowerCase();
   for (const be of BE_VERBS) {
@@ -61,9 +63,71 @@ function makeSimpleWrongVariant(sentence: string) {
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
   const level = body?.level as string | undefined;
+  const mode = (body?.mode === "reviewWrong" ? "reviewWrong" : "mixed") as Mode;
+  const deviceId = body?.deviceId as string | undefined;
+  const now = new Date();
+
+  if (mode === "reviewWrong") {
+    if (!deviceId) {
+      return NextResponse.json({ error: "deviceId is required" }, { status: 400 });
+    }
+
+    const attempts = await prisma.attempt.findMany({
+      where: {
+        deviceId,
+        kind: "grammar",
+        isCorrect: false,
+        ...(level ? { level } : {}),
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const seen = new Set<string>();
+    const selected = attempts.filter((attempt) => {
+      if (seen.has(attempt.sourceId)) return false;
+      seen.add(attempt.sourceId);
+      return true;
+    }).slice(0, TOTAL);
+
+    const questions = selected.map((attempt) => {
+      const choices = safeJsonParse<string[]>(attempt.choicesJson, []);
+      return {
+        id: attempt.questionId,
+        kind: "grammar" as const,
+        type: attempt.type as "mcq" | "blank",
+        level: attempt.level,
+        prompt: attempt.prompt,
+        choices: choices.length ? choices : undefined,
+        answer: attempt.answer,
+        explanation: attempt.explanation,
+        source: {
+          grammarId: attempt.sourceId,
+          title: "",
+        },
+      };
+    });
+
+    return NextResponse.json({ questions });
+  }
+
+  const masteredIds = deviceId
+    ? await prisma.reviewState.findMany({
+        where: {
+          deviceId,
+          kind: "grammar",
+          isMastered: true,
+          ...(level ? { level } : {}),
+        },
+        select: { sourceId: true },
+      })
+    : [];
+  const masteredIdList = masteredIds.map((state) => state.sourceId);
 
   const topics = await prisma.grammarTopic.findMany({
-    where: level ? { level } : undefined,
+    where: {
+      ...(level ? { level } : {}),
+      ...(deviceId && masteredIdList.length ? { id: { notIn: masteredIdList } } : {}),
+    },
     orderBy: [{ level: "asc" }, { title: "asc" }],
   });
 
@@ -71,11 +135,64 @@ export async function POST(request: Request) {
     return NextResponse.json({ questions: [] });
   }
 
-  const mcqTopics = randomSample(topics, Math.min(MCQ_COUNT, topics.length));
-  const remaining = topics.filter((topic) => !mcqTopics.some((t) => t.id === topic.id));
+  const dueStates = deviceId
+    ? await prisma.reviewState.findMany({
+        where: {
+          deviceId,
+          kind: "grammar",
+          isMastered: false,
+          nextReviewAt: { lte: now },
+          ...(level ? { level } : {}),
+        },
+        orderBy: { nextReviewAt: "asc" },
+        take: 50,
+      })
+    : [];
+  const dueIds = dueStates.map((state) => state.sourceId);
+  const dueIdSet = new Set(dueIds);
+  const dueTopics = dueIds.length
+    ? await prisma.grammarTopic.findMany({ where: { id: { in: dueIds } } })
+    : [];
+  const dueMap = new Map(dueTopics.map((topic) => [topic.id, topic]));
+  const dueOrdered = dueStates
+    .map((state) => dueMap.get(state.sourceId))
+    .filter((topic): topic is (typeof dueTopics)[number] => Boolean(topic));
+
+  const dueTarget = Math.round(TOTAL * 0.6);
+  const selectedDue = dueOrdered.slice(0, dueTarget);
+  const selectedIds = new Set(selectedDue.map((topic) => topic.id));
+  const randomPool = topics.filter((topic) => !selectedIds.has(topic.id) && !dueIdSet.has(topic.id));
+  let selectedTopics = [...selectedDue];
+  if (selectedTopics.length < TOTAL) {
+    const needed = TOTAL - selectedTopics.length;
+    selectedTopics = selectedTopics.concat(randomSample(randomPool, needed));
+  }
+  if (selectedTopics.length < TOTAL) {
+    const needed = TOTAL - selectedTopics.length;
+    const fallbackPool = topics.filter((topic) => !selectedTopics.some((item) => item.id === topic.id));
+    selectedTopics = selectedTopics.concat(randomSample(fallbackPool, needed));
+  }
+  const finalTopics = selectedTopics.slice(0, TOTAL);
+
+  const reviewStates =
+    deviceId && finalTopics.length
+      ? await prisma.reviewState.findMany({
+          where: {
+            deviceId,
+            kind: "grammar",
+            sourceId: { in: finalTopics.map((topic) => topic.id) },
+          },
+        })
+      : [];
+  const reviewMap = new Map(reviewStates.map((state) => [state.sourceId, state]));
+
+  const mcqTarget = Math.min(MCQ_COUNT, finalTopics.length);
+  const mcqTopics = randomSample(finalTopics, mcqTarget);
+  const remaining = finalTopics.filter((topic) => !mcqTopics.some((t) => t.id === topic.id));
+  const blankTarget = Math.min(BLANK_COUNT, finalTopics.length - mcqTopics.length);
   const blankTopics = randomSample(
-    remaining.length >= BLANK_COUNT ? remaining : topics,
-    Math.min(BLANK_COUNT, topics.length)
+    remaining.length >= blankTarget ? remaining : finalTopics,
+    blankTarget
   );
 
   const mcqQuestions = mcqTopics.map((topic) => {
@@ -94,6 +211,7 @@ export async function POST(request: Request) {
 
     const choices = uniqueChoices(shuffle([correct, ...distractors]), 4);
 
+    const reviewState = reviewMap.get(topic.id);
     return {
       id: `grammar-${topic.id}-mcq`,
       kind: "grammar",
@@ -107,6 +225,9 @@ export async function POST(request: Request) {
         grammarId: topic.id,
         title: topic.title,
       },
+      reviewState: reviewState
+        ? { isMastered: reviewState.isMastered, nextReviewAt: reviewState.nextReviewAt }
+        : null,
     };
   });
 
@@ -116,6 +237,7 @@ export async function POST(request: Request) {
     const token = pickBlankToken(sentence);
     const blanked = blankSentence(sentence, token);
 
+    const reviewState = reviewMap.get(topic.id);
     return {
       id: `grammar-${topic.id}-blank`,
       kind: "grammar",
@@ -128,6 +250,9 @@ export async function POST(request: Request) {
         grammarId: topic.id,
         title: topic.title,
       },
+      reviewState: reviewState
+        ? { isMastered: reviewState.isMastered, nextReviewAt: reviewState.nextReviewAt }
+        : null,
     };
   });
 
