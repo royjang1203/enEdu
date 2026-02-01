@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { getOrCreateDeviceId } from "@/lib/deviceId";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-const LEVELS = ["all", "A1", "A2", "B1", "B2"] as const;
+const LEVELS = ["all", "Level1", "Level2", "Level3", "Level4"] as const;
 
 type GrammarQuestion = {
   id: string;

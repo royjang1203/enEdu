@@ -12,8 +12,10 @@ model Word {
   word      String
   pos       String
   meaningKo String
-  level     String   // A1, A2, B1, B2
-  example   String
+  level     String   // Level1, Level2, Level3, Level4
+  grade     Int
+  exampleEn String
+  exampleKo String
   tagsJson  String   @default("[]")
 
   createdAt DateTime @default(now())
@@ -26,10 +28,13 @@ model Word {
 model GrammarTopic {
   id                 String   @id @default(cuid())
   title              String
-  level              String   // A1, A2, B1, B2 (or MIX)
+  level              String   // Level1, Level2, Level3, Level4 (or MIX)
+  grade              Int
   ruleSummary        String
   examplesJson       String   @default("[]")
+  examplesKoJson     String   @default("[]")
   commonMistakesJson String   @default("[]")
+  commonMistakesKoJson String @default("[]")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

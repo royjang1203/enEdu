@@ -25,7 +25,7 @@ export default async function GrammarPage({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <LevelFilter label="Level" levels={["all", "A1", "A2", "B1", "B2", "MIX"]} />
+          <LevelFilter label="Level" levels={["all", "Level1", "Level2", "Level3", "Level4"]} />
           <Link
             href="/grammar/test"
             className="rounded-md border border-input px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted"
@@ -53,6 +53,7 @@ export default async function GrammarPage({
                 </CardTitle>
                 <div className="mt-2 flex flex-wrap gap-2 text-sm text-muted-foreground">
                   <Badge>{topic.level}</Badge>
+                  <Badge>Grade {topic.grade}</Badge>
                   <span>{topic.ruleSummary}</span>
                 </div>
               </div>

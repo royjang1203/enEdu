@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { getOrCreateDeviceId } from "@/lib/deviceId";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-const LEVELS = ["all", "A1", "A2", "B1", "B2"] as const;
+const LEVELS = ["all", "Level1", "Level2", "Level3", "Level4"] as const;
 
 type VocabQuestion = {
   id: string;
@@ -266,8 +266,7 @@ export default function VocabTestPage() {
             </div>
             <div className="mt-auto space-y-3 pt-6">
               <div className="text-xs text-muted-foreground">
-                Selected: {level === "all" ? "All levels" : level} ·{" "}
-                {mode === "mixed" ? "Take Test" : "Review Wrong"}
+                Selected: {level === "all" ? "All levels" : level} · {mode === "mixed" ? "Take Test" : "Review Wrong"}
               </div>
               <Button className="w-full" variant="secondary" onClick={startTest} disabled={loading}>
                 {loading ? "Preparing..." : "Start Test"}
@@ -280,13 +279,13 @@ export default function VocabTestPage() {
               Identify your weak spots by level and build consistency with short, focused checks.
             </p>
             <p className="mt-3">
-              Use “Review Wrong” to revisit missed words only and improve faster.
+              Use "Review Wrong" to revisit missed words only and improve faster.
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
               레벨별 취약한 부분을 확인하고, 짧고 집중적인 테스트로 꾸준함을 만들어 보세요.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              “Review Wrong”으로 틀린 단어만 복습해 더 빠르게 개선할 수 있습니다.
+              "Review Wrong"으로 틀린 단어만 복습해 더 빠르게 개선할 수 있습니다.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Badge className="border border-muted-foreground/20 bg-transparent text-muted-foreground">

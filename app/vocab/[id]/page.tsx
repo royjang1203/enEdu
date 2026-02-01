@@ -17,7 +17,7 @@ export default async function WordDetailPage({
   return (
     <div className="space-y-6">
       <Link href="/vocab" className="text-sm text-muted-foreground hover:text-foreground">
-        ? Back to Vocabulary
+        < Back to Vocabulary
       </Link>
 
       <Card className="bg-white/80">
@@ -35,7 +35,10 @@ export default async function WordDetailPage({
           </div>
           <div>
             <p className="text-sm font-semibold text-muted-foreground">Example</p>
-            <p className="text-muted-foreground">{word.example}</p>
+            <p className="text-muted-foreground">{word.exampleEn}</p>
+            {word.exampleKo ? (
+              <p className="mt-1 text-xs text-muted-foreground/80">{word.exampleKo}</p>
+            ) : null}
           </div>
         </CardContent>
       </Card>

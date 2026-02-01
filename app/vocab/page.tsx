@@ -59,7 +59,10 @@ export default async function VocabPage({
               <span className="text-sm text-muted-foreground">{word.meaningKo}</span>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">Example: {word.example}</p>
+              <p className="text-sm text-muted-foreground">Example: {word.exampleEn}</p>
+              {word.exampleKo ? (
+                <p className="mt-1 text-xs text-muted-foreground/80">{word.exampleKo}</p>
+              ) : null}
             </CardContent>
           </Card>
         ))}

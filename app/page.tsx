@@ -24,7 +24,7 @@ export default function HomePage() {
         <Card className="bg-white/80">
           <CardHeader>
             <CardTitle>Vocabulary</CardTitle>
-            <CardDescription>120 curated words across A1 to B2.</CardDescription>
+            <CardDescription>120 curated words across Level1 to Level4.</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">

@@ -1,0 +1,193 @@
+﻿level,grade,word,pos,meaning_ko,example_en,example_ko,tags
+Level1,3,apple,n,사과,I eat an apple.,나는 사과를 먹어요.,food
+Level1,3,banana,n,바나나,The banana is yellow.,바나나는 노랗습니다.,food
+Level1,3,book,n,책,This book is fun.,이 책은 재미있어요.,school
+Level1,3,bag,n,가방,My bag is heavy.,내 가방은 무거워요.,school
+Level1,3,pencil,n,연필,I have a pencil.,나는 연필이 있어요.,school
+Level1,3,desk,n,책상,My desk is clean.,내 책상은 깨끗해요.,school
+Level1,3,chair,n,의자,Sit on the chair.,의자에 앉으세요.,home
+Level1,3,classroom,n,교실,Our classroom is bright.,우리 교실은 밝아요.,school
+Level1,3,teacher,n,선생님,My teacher is kind.,우리 선생님은 친절해요.,people
+Level1,3,student,n,학생,I am a student.,나는 학생이에요.,people
+Level1,3,mom,n,엄마,My mom is here.,엄마가 여기 있어요.,family
+Level1,3,dad,n,아빠,My dad is tall.,아빠는 키가 커요.,family
+Level1,3,friend,n,친구,She is my friend.,그녀는 내 친구예요.,people
+Level1,3,brother,n,형/남동생,My brother plays soccer.,우리 형(남동생)은 축구해요.,family
+Level1,3,sister,n,누나/여동생,My sister likes music.,우리 누나(여동생)는 음악을 좋아해요.,family
+Level1,3,cat,n,고양이,The cat is cute.,고양이가 귀여워요.,animal
+Level1,3,dog,n,개,My dog runs fast.,우리 강아지는 빨리 달려요.,animal
+Level1,3,bird,n,새,A bird can fly.,새는 날 수 있어요.,animal
+Level1,3,fish,n,물고기,I see a fish.,나는 물고기를 봐요.,animal
+Level1,3,cow,n,소,The cow is big.,소는 커요.,animal
+Level1,3,milk,n,우유,I drink milk.,나는 우유를 마셔요.,food
+Level1,3,water,n,물,Please drink water.,물을 마셔 주세요.,food
+Level1,3,juice,n,주스,Orange juice is sweet.,오렌지 주스는 달아요.,food
+Level1,3,cake,n,케이크,We have cake today.,오늘 케이크가 있어요.,food
+Level1,3,pizza,n,피자,I like pizza.,나는 피자를 좋아해요.,food
+Level1,3,soccer,n,축구,We play soccer.,우리는 축구를 해요.,sports
+Level1,3,baseball,n,야구,He likes baseball.,그는 야구를 좋아해요.,sports
+Level1,3,basketball,n,농구,Basketball is fun.,농구는 재미있어요.,sports
+Level1,3,run,v,달리다,I run to school.,나는 학교에 달려가요.,verb
+Level1,3,walk,v,걷다,We walk home.,우리는 집에 걸어가요.,verb
+Level1,3,jump,v,점프하다,Jump high!,높이 점프하세요!,verb
+Level1,3,dance,v,춤추다,They dance together.,그들은 함께 춤춰요.,verb
+Level1,3,sing,v,노래하다,I sing a song.,나는 노래를 불러요.,verb
+Level1,3,draw,v,그리다,I draw a cat.,나는 고양이를 그려요.,verb
+Level1,3,read,v,읽다,I read a book.,나는 책을 읽어요.,verb
+Level1,3,write,v,쓰다,Write your name.,이름을 쓰세요.,verb
+Level1,3,open,v,열다,Open the door.,문을 여세요.,verb
+Level1,3,close,v,닫다,Close the window.,창문을 닫으세요.,verb
+Level1,3,hello,interj,안녕(인사),"Hello, nice to meet you.","안녕하세요, 만나서 반가워요.",greeting
+Level1,3,bye,interj,안녕(작별),Bye! See you.,안녕! 또 봐.,greeting
+Level1,3,please,adv,제발/부탁합니다,Please help me.,도와주세요.,polite
+Level1,3,thanks,interj,고마워,Thanks a lot.,정말 고마워.,polite
+Level1,3,happy,adj,행복한,I am happy today.,오늘 나는 행복해요.,adj
+Level1,3,sad,adj,슬픈,He feels sad.,그는 슬퍼해요.,adj
+Level1,3,big,adj,큰,That is a big dog.,저건 큰 개예요.,adj
+Level1,3,small,adj,작은,I have a small bag.,나는 작은 가방이 있어요.,adj
+Level1,3,hot,adj,더운,It is hot today.,오늘은 더워요.,weather
+Level1,3,cold,adj,추운,It is cold outside.,밖은 추워요.,weather
+Level2,4,afternoon,n,오후,We study in the afternoon.,우리는 오후에 공부해요.,time
+Level2,4,morning,n,아침,I eat breakfast in the morning.,나는 아침에 아침을 먹어요.,time
+Level2,4,evening,n,저녁,Good evening!,안녕하세요(저녁 인사)!,time
+Level2,4,breakfast,n,아침식사,Breakfast is ready.,아침식사가 준비됐어요.,food
+Level2,4,lunch,n,점심,I have lunch at school.,나는 학교에서 점심을 먹어요.,food
+Level2,4,dinner,n,저녁식사,We eat dinner together.,우리는 함께 저녁을 먹어요.,food
+Level2,4,cloudy,adj,흐린,It is cloudy today.,오늘은 흐려요.,weather
+Level2,4,rainy,adj,비 오는,It is rainy outside.,밖에 비가 와요.,weather
+Level2,4,snowy,adj,눈 오는,It is snowy in winter.,겨울에는 눈이 와요.,weather
+Level2,4,windy,adj,바람 부는,It is windy today.,오늘은 바람이 불어요.,weather
+Level2,4,sunny,adj,맑은,It is sunny now.,지금은 맑아요.,weather
+Level2,4,umbrella,n,우산,Take an umbrella.,우산을 챙기세요.,weather
+Level2,4,jacket,n,재킷,I wear a jacket.,나는 재킷을 입어요.,clothes
+Level2,4,coat,n,코트,My coat is warm.,내 코트는 따뜻해요.,clothes
+Level2,4,shirt,n,셔츠,This shirt is blue.,이 셔츠는 파란색이에요.,clothes
+Level2,4,pants,n,바지,These pants are new.,이 바지는 새 거예요.,clothes
+Level2,4,shoes,n,신발,My shoes are clean.,내 신발은 깨끗해요.,clothes
+Level2,4,hat,n,모자,He wears a hat.,그는 모자를 써요.,clothes
+Level2,4,gloves,n,장갑,I need gloves.,나는 장갑이 필요해요.,clothes
+Level2,4,library,n,도서관,We go to the library.,우리는 도서관에 가요.,place
+Level2,4,playground,n,운동장,Kids play in the playground.,아이들이 운동장에서 놀아요.,place
+Level2,4,park,n,공원,Let’s meet at the park.,공원에서 만나자.,place
+Level2,4,hospital,n,병원,The hospital is near here.,병원이 여기 근처예요.,place
+Level2,4,bus,n,버스,I take the bus.,나는 버스를 타요.,transport
+Level2,4,subway,n,지하철,The subway is fast.,지하철은 빨라요.,transport
+Level2,4,bicycle,n,자전거,I ride a bicycle.,나는 자전거를 타요.,transport
+Level2,4,computer,n,컴퓨터,The computer is on.,컴퓨터가 켜져 있어요.,tech
+Level2,4,phone,n,전화기,My phone rings.,내 전화가 울려요.,tech
+Level2,4,homework,n,숙제,I do my homework.,나는 숙제를 해요.,school
+Level2,4,question,n,질문,I have a question.,질문이 있어요.,school
+Level2,4,answer,n,대답/정답,The answer is right.,정답이 맞아요.,school
+Level2,4,color,n,색,My favorite color is green.,내가 좋아하는 색은 초록색이에요.,basic
+Level2,4,black,adj,검은,The cat is black.,그 고양이는 검은색이에요.,color
+Level2,4,white,adj,하얀,This is a white cup.,이건 하얀 컵이에요.,color
+Level2,4,red,adj,빨간,I have a red pen.,나는 빨간 펜이 있어요.,color
+Level2,4,blue,adj,파란,The sky is blue.,하늘은 파래요.,color
+Level2,4,green,adj,초록,The grass is green.,풀은 초록색이에요.,color
+Level2,4,clean,adj,깨끗한,Keep your room clean.,방을 깨끗하게 유지하세요.,adj
+Level2,4,dirty,adj,더러운,My shoes are dirty.,내 신발이 더러워요.,adj
+Level2,4,tired,adj,피곤한,I am tired now.,지금 나는 피곤해요.,adj
+Level2,4,hungry,adj,배고픈,I am hungry.,나는 배고파요.,adj
+Level2,4,thirsty,adj,목마른,I am thirsty.,나는 목말라요.,adj
+Level2,4,help,v,돕다,Can you help me?,저를 도와줄 수 있나요?,verb
+Level2,4,buy,v,사다,I buy a sandwich.,나는 샌드위치를 사요.,verb
+Level2,4,sell,v,팔다,They sell snacks.,그들은 간식을 팔아요.,verb
+Level2,4,make,v,만들다,We make a paper boat.,우리는 종이배를 만들어요.,verb
+Level2,4,choose,v,고르다,Choose your seat.,자리를 고르세요.,verb
+Level2,4,favorite,adj,가장 좋아하는,My favorite food is pizza.,내가 가장 좋아하는 음식은 피자예요.,adj
+Level3,5,always,adv,항상,I always brush my teeth.,나는 항상 이를 닦아요.,routine
+Level3,5,usually,adv,보통,I usually go to bed at 10.,나는 보통 10시에 자요.,routine
+Level3,5,sometimes,adv,가끔,I sometimes play games.,나는 가끔 게임을 해요.,routine
+Level3,5,never,adv,절대~않다,I never skip breakfast.,나는 아침을 거르지 않아요.,routine
+Level3,5,weekend,n,주말,I study on the weekend.,나는 주말에 공부해요.,time
+Level3,5,vacation,n,방학/휴가,Winter vacation is fun.,겨울방학은 재미있어요.,time
+Level3,5,country,n,나라,Korea is my country.,한국은 내 나라예요.,place
+Level3,5,city,n,도시,The city is busy.,도시는 바빠요.,place
+Level3,5,market,n,시장,We go to the market.,우리는 시장에 가요.,place
+Level3,5,restaurant,n,식당,This restaurant is popular.,이 식당은 인기 있어요.,place
+Level3,5,museum,n,박물관,I visited a museum.,나는 박물관을 방문했어요.,place
+Level3,5,exercise,n/v,운동/운동하다,I exercise every day.,나는 매일 운동해요.,health
+Level3,5,healthy,adj,건강한,Vegetables are healthy.,채소는 건강해요.,health
+Level3,5,sick,adj,아픈,He is sick today.,그는 오늘 아파요.,health
+Level3,5,medicine,n,약,Take your medicine.,약을 드세요.,health
+Level3,5,hobby,n,취미,My hobby is drawing.,내 취미는 그림 그리기예요.,life
+Level3,5,travel,v,여행하다,We travel in summer.,우리는 여름에 여행해요.,life
+Level3,5,camping,n,캠핑,We go camping.,우리는 캠핑을 가요.,life
+Level3,5,mountain,n,산,The mountain is high.,산은 높아요.,nature
+Level3,5,river,n,강,The river is long.,강은 길어요.,nature
+Level3,5,forest,n,숲,We walk in the forest.,우리는 숲에서 걸어요.,nature
+Level3,5,ocean,n,바다,The ocean is beautiful.,바다는 아름다워요.,nature
+Level3,5,environment,n,환경,Protect the environment.,환경을 보호하세요.,nature
+Level3,5,practice,v,연습하다,Practice English daily.,매일 영어를 연습하세요.,study
+Level3,5,improve,v,향상시키다,I want to improve my English.,나는 영어를 향상시키고 싶어요.,study
+Level3,5,plan,n/v,계획/계획하다,We plan a trip.,우리는 여행을 계획해요.,study
+Level3,5,prepare,v,준비하다,Prepare for the test.,시험을 준비하세요.,study
+Level3,5,project,n,프로젝트,Our project is ready.,우리 프로젝트가 준비됐어요.,school
+Level3,5,team,n,팀,Our team works well.,우리 팀은 잘 협력해요.,school
+Level3,5,rule,n,규칙,Follow the rule.,규칙을 지키세요.,school
+Level3,5,problem,n,문제,This problem is easy.,이 문제는 쉬워요.,school
+Level3,5,solution,n,해결책,We found a solution.,우리는 해결책을 찾았어요.,school
+Level3,5,because,conj,왜냐하면,I stayed home because it rained.,비가 와서 나는 집에 있었어요.,grammar
+Level3,5,before,prep/conj,~전에,Wash your hands before eating.,먹기 전에 손을 씻으세요.,grammar
+Level3,5,after,prep/conj,~후에,I study after dinner.,나는 저녁 후에 공부해요.,grammar
+Level3,5,between,prep,~사이에,The bank is between the cafe and the store.,은행은 카페와 가게 사이에 있어요.,grammar
+Level3,5,during,prep,~동안,I read during the trip.,여행 동안 나는 읽었어요.,grammar
+Level3,5,different,adj,다른,We have different ideas.,우리는 다른 생각이 있어요.,adj
+Level3,5,important,adj,중요한,Sleep is important.,잠은 중요해요.,adj
+Level3,5,careful,adj,조심스러운,Be careful on the road.,길에서 조심하세요.,adj
+Level3,5,popular,adj,인기 있는,This song is popular.,이 노래는 인기 있어요.,adj
+Level3,5,expensive,adj,비싼,This bag is expensive.,이 가방은 비싸요.,adj
+Level3,5,cheap,adj,저렴한,These shoes are cheap.,이 신발은 저렴해요.,adj
+Level3,5,borrow,v,빌리다,Can I borrow your pen?,펜을 빌려도 될까요?,verb
+Level3,5,return,v,반납하다/돌려주다,Please return the book.,책을 반납해 주세요.,verb
+Level3,5,invite,v,초대하다,I invited my friend.,나는 친구를 초대했어요.,verb
+Level3,5,accept,v,받아들이다,I accept your offer.,제안을 받아들일게요.,verb
+Level3,5,refuse,v,거절하다,He refused the candy.,그는 사탕을 거절했어요.,verb
+Level4,6,schedule,n,일정,My schedule is full.,내 일정은 꽉 차 있어요.,life
+Level4,6,appointment,n,약속/예약,I have an appointment at 3.,3시에 약속이 있어요.,life
+Level4,6,direction,n,방향,What direction is it?,어느 방향인가요?,travel
+Level4,6,turn,v,돌다/회전하다,Turn left here.,여기서 왼쪽으로 도세요.,travel
+Level4,6,straight,adv,곧장,Go straight for two blocks.,두 블록 곧장 가세요.,travel
+Level4,6,cross,v,건너다,Cross the street carefully.,조심해서 길을 건너세요.,travel
+Level4,6,traffic,n,교통,Traffic is heavy today.,오늘 교통이 혼잡해요.,travel
+Level4,6,ticket,n,표,I bought a ticket.,나는 표를 샀어요.,travel
+Level4,6,passport,n,여권,Don’t forget your passport.,여권을 잊지 마세요.,travel
+Level4,6,airport,n,공항,We arrived at the airport.,우리는 공항에 도착했어요.,travel
+Level4,6,hotel,n,호텔,Our hotel is near the beach.,우리 호텔은 해변 근처예요.,travel
+Level4,6,trip,n,여행,The trip was amazing.,여행은 정말 멋졌어요.,travel
+Level4,6,culture,n,문화,I learned about Korean culture.,나는 한국 문화에 대해 배웠어요.,study
+Level4,6,history,n,역사,History is interesting.,역사는 흥미로워요.,study
+Level4,6,science,n,과학,Science class starts now.,과학 수업이 지금 시작해요.,school
+Level4,6,math,n,수학,Math is challenging.,수학은 도전적이에요.,school
+Level4,6,opinion,n,의견,What is your opinion?,당신의 의견은 무엇인가요?,discussion
+Level4,6,agree,v,동의하다,I agree with you.,나는 당신에게 동의해요.,discussion
+Level4,6,disagree,v,동의하지 않다,I disagree politely.,나는 정중하게 반대해요.,discussion
+Level4,6,explain,v,설명하다,Please explain again.,다시 설명해 주세요.,study
+Level4,6,reason,n,이유,Tell me the reason.,이유를 말해 주세요.,study
+Level4,6,example,n,예시,Here is an example.,여기 예시가 있어요.,study
+Level4,6,compare,v,비교하다,Compare these two pictures.,이 두 그림을 비교해 보세요.,study
+Level4,6,choose,v,선택하다,Choose the best answer.,가장 좋은 답을 선택하세요.,study
+Level4,6,solve,v,풀다/해결하다,Solve this problem.,이 문제를 푸세요.,study
+Level4,6,challenge,n,도전/과제,This is a new challenge.,이건 새로운 도전이에요.,study
+Level4,6,increase,v,증가하다,Prices increased.,가격이 올랐어요.,study
+Level4,6,reduce,v,줄이다,Reduce screen time.,화면 시간을 줄이세요.,study
+Level4,6,protect,v,보호하다,Protect your eyes.,눈을 보호하세요.,health
+Level4,6,safety,n,안전,Safety comes first.,안전이 최우선이에요.,health
+Level4,6,accident,n,사고,An accident happened.,사고가 났어요.,health
+Level4,6,emergency,n,비상상황,Call in an emergency.,비상시 전화하세요.,health
+Level4,6,prepare,v,준비하다,Prepare for the trip.,여행을 준비하세요.,life
+Level4,6,pack,v,짐을 싸다,I pack my bag.,나는 가방을 싸요.,life
+Level4,6,decision,n,결정,It was a hard decision.,어려운 결정이었어요.,life
+Level4,6,future,n,미래,Think about the future.,미래를 생각해 보세요.,life
+Level4,6,goal,n,목표,My goal is clear.,내 목표는 분명해요.,life
+Level4,6,practice,v,연습하다,Practice speaking English.,영어 말하기를 연습하세요.,study
+Level4,6,review,v,복습하다,Review the words today.,오늘 단어를 복습하세요.,study
+Level4,6,mistake,n,실수,It’s okay to make mistakes.,실수해도 괜찮아요.,study
+Level4,6,correct,adj,정확한/맞는,That answer is correct.,그 답은 맞아요.,study
+Level4,6,incorrect,adj,틀린,This is incorrect.,이건 틀렸어요.,study
+Level4,6,confidence,n,자신감,Build your confidence.,자신감을 키우세요.,study
+Level4,6,consistent,adj,꾸준한/일관된,Be consistent with practice.,연습을 꾸준히 하세요.,study
+Level4,6,improve,v,개선하다,You can improve quickly.,빠르게 향상할 수 있어요.,study
+Level4,6,progress,n,진전,I see your progress.,당신의 성장이 보여요.,study
+Level4,6,responsible,adj,책임 있는,Be responsible for your work.,일에 책임감을 가지세요.,life
+Level4,6,respect,n/v,존중/존중하다,Respect others.,다른 사람을 존중하세요.,life

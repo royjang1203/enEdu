@@ -182,7 +182,7 @@ export async function POST(request: Request) {
   });
 
   const blankQuestions = blankWords.map((word) => {
-    const blanked = blankExample(word.example, word.word);
+    const blanked = blankExample(word.exampleEn, word.word);
     const prompt = blanked
       ? `Fill in the blank: ${blanked} (word meaning: ${word.meaningKo})`
       : `Fill in the blank: ___ (word meaning: ${word.meaningKo})`;

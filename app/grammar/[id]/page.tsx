@@ -15,7 +15,9 @@ export default async function GrammarDetailPage({
   }
 
   const examples = JSON.parse(topic.examplesJson) as string[];
+  const examplesKo = JSON.parse(topic.examplesKoJson) as string[];
   const mistakes = JSON.parse(topic.commonMistakesJson) as string[];
+  const mistakesKo = JSON.parse(topic.commonMistakesKoJson) as string[];
 
   return (
     <div className="space-y-6">
@@ -37,17 +39,27 @@ export default async function GrammarDetailPage({
           </div>
           <div>
             <p className="text-sm font-semibold text-muted-foreground">Examples</p>
-            <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
+            <ul className="list-disc space-y-3 pl-5 text-muted-foreground">
               {examples.map((example, index) => (
-                <li key={index}>{example}</li>
+                <li key={index}>
+                  <div>{example}</div>
+                  {examplesKo[index] ? (
+                    <div className="mt-1 text-sm text-muted-foreground/80">{examplesKo[index]}</div>
+                  ) : null}
+                </li>
               ))}
             </ul>
           </div>
           <div>
             <p className="text-sm font-semibold text-muted-foreground">Common Mistakes</p>
-            <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
+            <ul className="list-disc space-y-3 pl-5 text-muted-foreground">
               {mistakes.map((mistake, index) => (
-                <li key={index}>{mistake}</li>
+                <li key={index}>
+                  <div>{mistake}</div>
+                  {mistakesKo[index] ? (
+                    <div className="mt-1 text-sm text-muted-foreground/80">{mistakesKo[index]}</div>
+                  ) : null}
+                </li>
               ))}
             </ul>
           </div>

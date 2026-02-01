@@ -1,0 +1,9 @@
+﻿level,grade,title,rule_summary,examples_en,examples_ko,common_mistakes_en,common_mistakes_ko
+Level1,3,Be동사 am/is/are,"주어에 따라 am, is, are를 사용한다.",I am a student.|She is happy.|They are friends.,나는 학생이에요.|그녀는 행복해요.|그들은 친구예요.,I is a student.|She are happy.,I에 is 사용|She에 are 사용
+Level1,3,This / That,"가까운 것은 this, 먼 것은 that을 사용한다.",This is my book.|That is your bag.,이것은 내 책이에요.|저것은 네 가방이에요.,That is my book (near).,가까운 것에 that 사용
+Level2,4,현재형 3인칭 단수,he/she/it 주어일 때 동사에 -s/-es를 붙인다.,He likes milk.|She goes to school.,그는 우유를 좋아해요.|그녀는 학교에 가요.,He like milk.|She go to school.,3인칭 단수 -s 누락
+Level2,4,과거형 -ed,규칙 동사의 과거형은 -ed를 붙인다.,I played soccer.|We watched TV.,나는 축구를 했어요.|우리는 TV를 봤어요.,I play soccer yesterday.,과거에 현재형 사용
+Level3,5,조동사 can,can 뒤에는 동사원형을 사용한다.,I can swim.|She can help you.,나는 수영할 수 있어요.|그녀는 너를 도울 수 있어요.,She can helps you.,can 뒤 동사원형 아님
+Level3,5,비교급,형용사에 -er 또는 more를 사용한다.,This bag is bigger.|She is more careful.,이 가방은 더 커요.|그녀는 더 조심스러워요.,more bigger,비교급 중복
+Level4,6,미래형 will,미래의 일이나 의지를 나타낼 때 will을 사용한다.,I will study tomorrow.|It will rain.,나는 내일 공부할 거예요.|비가 올 거예요.,I will studying tomorrow.,will 뒤 동사원형 아님
+Level4,6,현재완료 have/has,과거부터 지금까지의 경험을 나타낸다.,I have been to Busan.|She has finished her homework.,나는 부산에 가본 적이 있어요.|그녀는 숙제를 끝냈어요.,I have went to Busan.,과거분사 형태 오류

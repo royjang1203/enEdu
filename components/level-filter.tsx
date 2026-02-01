@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const DEFAULT_LEVELS = ["all", "A1", "A2", "B1", "B2"] as const;
+const DEFAULT_LEVELS = ["all", "Level1", "Level2", "Level3", "Level4"] as const;
 
 export function LevelFilter({ label, levels }: { label: string; levels?: string[] }) {
   const router = useRouter();

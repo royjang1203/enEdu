@@ -197,7 +197,9 @@ export async function POST(request: Request) {
 
   const mcqQuestions = mcqTopics.map((topic) => {
     const examples = safeJsonParse<string[]>(topic.examplesJson, []);
+    const examplesKo = safeJsonParse<string[]>(topic.examplesKoJson, []);
     const correct = examples[0] ?? "";
+    const correctKo = examplesKo[0] ?? "";
 
     const otherTopics = topics.filter((t) => t.id !== topic.id);
     const mistakesPool = otherTopics.flatMap((t) => safeJsonParse<string[]>(t.commonMistakesJson, []));
@@ -212,6 +214,14 @@ export async function POST(request: Request) {
     const choices = uniqueChoices(shuffle([correct, ...distractors]), 4);
 
     const reviewState = reviewMap.get(topic.id);
+    const explanation = [
+      `${topic.title}: ${topic.ruleSummary}`,
+      correct ? `Example: ${correct}` : "",
+      correctKo ? `예문: ${correctKo}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     return {
       id: `grammar-${topic.id}-mcq`,
       kind: "grammar",
@@ -220,7 +230,7 @@ export async function POST(request: Request) {
       prompt: `Which sentence is correct according to: ${topic.title}?`,
       choices,
       answer: correct,
-      explanation: `${topic.title}: ${topic.ruleSummary}`,
+      explanation,
       source: {
         grammarId: topic.id,
         title: topic.title,
@@ -233,11 +243,21 @@ export async function POST(request: Request) {
 
   const blankQuestions = blankTopics.map((topic) => {
     const examples = safeJsonParse<string[]>(topic.examplesJson, []);
+    const examplesKo = safeJsonParse<string[]>(topic.examplesKoJson, []);
     const sentence = examples[0] ?? "";
+    const sentenceKo = examplesKo[0] ?? "";
     const token = pickBlankToken(sentence);
     const blanked = blankSentence(sentence, token);
 
     const reviewState = reviewMap.get(topic.id);
+    const explanation = [
+      `${topic.title}: ${topic.ruleSummary}`,
+      sentence ? `Example: ${sentence}` : "",
+      sentenceKo ? `예문: ${sentenceKo}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     return {
       id: `grammar-${topic.id}-blank`,
       kind: "grammar",
@@ -245,7 +265,7 @@ export async function POST(request: Request) {
       level: topic.level,
       prompt: `Fill in the blank based on the rule: ${topic.ruleSummary}\nSentence: ${blanked}`,
       answer: token,
-      explanation: `${topic.title}: ${topic.ruleSummary}`,
+      explanation,
       source: {
         grammarId: topic.id,
         title: topic.title,
